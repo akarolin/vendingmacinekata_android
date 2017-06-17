@@ -78,4 +78,17 @@ public class VendingMachineManagerTests {
         vendingMachineManager.setSoldOut(false);
         assertTrue(vendingMachineManager.buyProduct(VendingMachineManager.CHIPS));
     }
+
+    @Test
+    public void ExactChangeTest() {
+        vendingMachineManager.setExactChange(true);
+        vendingMachineManager.insertCoin(Coin.Quarter);
+        vendingMachineManager.insertCoin(Coin.Quarter);
+        vendingMachineManager.insertCoin(Coin.Quarter);
+        assertFalse(vendingMachineManager.buyProduct(VendingMachineManager.CANDY));
+
+        vendingMachineManager.setExactChange(false);
+        assertTrue(vendingMachineManager.buyProduct(VendingMachineManager.CANDY));
+        assertEquals(vendingMachineManager.getCentsReturned(),10);
+    }
 }

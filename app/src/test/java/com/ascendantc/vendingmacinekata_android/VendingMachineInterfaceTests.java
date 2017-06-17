@@ -100,6 +100,24 @@ public class VendingMachineInterfaceTests {
         Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.THANK_YOU);
         Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
     }
+
+    @Test
+    public void ExactChangeTest () {
+        vendingMachineInterface.setExactChange(true);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.EXACT_CHANGE);
+
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.buyCandy();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),String.format("%s $0.65",VendingMachineInterface.PRICE));
+
+        vendingMachineInterface.returnCoins();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.EXACT_CHANGE);
+
+        vendingMachineInterface.setExactChange(false);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+    }
 }
 
 

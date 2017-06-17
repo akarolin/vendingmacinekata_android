@@ -27,6 +27,17 @@ class VendingMachineManager {
     void setSoldOut(boolean soldOut) {
         this.soldOut = soldOut;
     }
+    boolean isSoldOut() {
+        return soldOut;
+    }
+
+    private boolean exactChangeRequired;
+    void setExactChange(boolean exactChangeRequired) {
+        this.exactChangeRequired = exactChangeRequired;
+    }
+    boolean getExactChangeRequired() {
+        return exactChangeRequired;
+    }
 
     private HashMap<String, Integer> products;
 
@@ -40,7 +51,6 @@ class VendingMachineManager {
         products.put(COLA, 100);
         products.put(CANDY, 65);
     }
-
 
     int insertCoin(Coin coin) {
         if (acceptsCoin(coin))
@@ -69,7 +79,7 @@ class VendingMachineManager {
     }
 
     private boolean canBuy(int price) {
-        return !soldOut && price <= centsInserted;
+        return !soldOut && (price == centsInserted || (price < centsInserted && !exactChangeRequired));
     }
 
     void returnCoins() {
@@ -77,7 +87,4 @@ class VendingMachineManager {
         centsInserted = 0;
     }
 
-    boolean isSoldOut() {
-        return soldOut;
-    }
 }

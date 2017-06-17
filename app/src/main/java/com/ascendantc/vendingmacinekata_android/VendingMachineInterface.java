@@ -13,6 +13,7 @@ class VendingMachineInterface {
     static final String PRICE = "PRICE:";
     static final String THANK_YOU = "THANK YOU";
     static final String SOLD_OUT = "SOLD OUT";
+    static final String EXACT_CHANGE = "EXACT CHANGE ONLY";
 
     private VendingMachineManager vendingMachineManager = new VendingMachineManager();
 
@@ -25,7 +26,8 @@ class VendingMachineInterface {
 
     void setDisplayText(int cents) {
         if (BuildConfig.DEBUG && cents < 0) throw new AssertionError("cents must be > 0");
-        displayText = cents > 0 ? String.format(Locale.US,"$%d.%02d",cents/100,cents%100) : INSERT_COIN;
+        String zeroText = vendingMachineManager.getExactChangeRequired() ? EXACT_CHANGE : INSERT_COIN;
+        displayText = cents > 0 ? String.format(Locale.US,"$%d.%02d",cents/100,cents%100) : zeroText;
     }
 
     void setDisplayText(String message) {
@@ -82,5 +84,9 @@ class VendingMachineInterface {
 
     void setSoldOut(boolean soldOut) {
         vendingMachineManager.setSoldOut(soldOut);
+    }
+
+    void setExactChange(boolean exactChange) {
+        vendingMachineManager.setExactChange(exactChange);
     }
 }
