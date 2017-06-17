@@ -1,6 +1,8 @@
 package com.ascendantc.vendingmacinekata_android;
 
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -14,7 +16,7 @@ public class VendingMachineInterfaceTests {
     private VendingMachineInterface vendingMachineInterface = new VendingMachineInterface();
 
     @Test
-    public void testDisplay() {
+    public void DisplayTest() {
 
         assertEquals(vendingMachineInterface.getDisplayText(), VendingMachineInterface.INSERT_COIN);
         vendingMachineInterface.setDisplayText(5);
@@ -24,7 +26,7 @@ public class VendingMachineInterfaceTests {
     }
 
     @Test
-    public void testInsertCoins() {
+    public void InsertCoinsTest() {
         assertEquals(vendingMachineInterface.getDisplayText(), VendingMachineInterface.INSERT_COIN);
         vendingMachineInterface.insertCoin(Coin.Nickel);
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.05");
@@ -34,6 +36,42 @@ public class VendingMachineInterfaceTests {
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.40");
         vendingMachineInterface.insertCoin(Coin.Penny);
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.40");
+    }
+
+    @Test
+    public void BuyProductTest() {
+
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),"$0.25");
+
+        vendingMachineInterface.buyChips();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),String.format("%s $0.50",VendingMachineInterface.PRICE));
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),"$0.25");
+
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),"$0.50");
+
+        vendingMachineInterface.buyChips();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.THANK_YOU);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.buyCola();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.THANK_YOU);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.buyCandy();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.THANK_YOU);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+
     }
 }
 

@@ -9,6 +9,10 @@ import java.util.HashMap;
 
 class VendingMachineManager {
 
+    static final String CHIPS = "Chips";
+    static final String COLA = "Cola";
+    static final String CANDY = "Candy";
+
     private int centsInserted = 0;
 
     private HashMap<String, Integer> products;
@@ -19,10 +23,12 @@ class VendingMachineManager {
 
     VendingMachineManager () {
         products = new HashMap<>();
-        products.put("chips", 50);
-        products.put("cola", 100);
-        products.put("candy", 65);
+        products.put(CHIPS, 50);
+        products.put(COLA, 100);
+        products.put(CANDY, 65);
     }
+
+    int getCentsInserted() { return centsInserted; }
 
     int insertCoin(Coin coin) {
         if (acceptsCoin(coin))

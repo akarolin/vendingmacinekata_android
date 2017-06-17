@@ -34,24 +34,24 @@ public class VendingMachineManagerTests {
 
     @Test
     public void ProductPriceTest() {
-        int price = vendingMachineManager.getProductPrice("chips");
+        int price = vendingMachineManager.getProductPrice(VendingMachineManager.CHIPS);
         assertEquals(price, 50);
-        price = vendingMachineManager.getProductPrice("cola");
+        price = vendingMachineManager.getProductPrice(VendingMachineManager.COLA);
         assertEquals(price, 100);
-        price = vendingMachineManager.getProductPrice("candy");
+        price = vendingMachineManager.getProductPrice(VendingMachineManager.CANDY);
         assertEquals(price, 65);
     }
 
     @Test
     public void BuyProductTest() {
         vendingMachineManager.insertCoin(Coin.Quarter);
-        assertFalse(vendingMachineManager.buyProduct("chips"));
+        assertFalse(vendingMachineManager.buyProduct(VendingMachineManager.CHIPS));
         vendingMachineManager.insertCoin(Coin.Quarter);
-        assertTrue(vendingMachineManager.buyProduct("chips"));
+        assertTrue(vendingMachineManager.buyProduct(VendingMachineManager.CHIPS));
 
         vendingMachineManager.insertCoin(Coin.Quarter);
         vendingMachineManager.insertCoin(Coin.Quarter);
         vendingMachineManager.insertCoin(Coin.Quarter);
-        assertTrue(vendingMachineManager.buyProduct("candy"));
+        assertTrue(vendingMachineManager.buyProduct(VendingMachineManager.CANDY));
     }
 }
