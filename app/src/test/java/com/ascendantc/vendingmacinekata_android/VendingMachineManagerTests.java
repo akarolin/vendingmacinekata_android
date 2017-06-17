@@ -67,4 +67,15 @@ public class VendingMachineManagerTests {
         assertEquals(vendingMachineManager.getCentsInserted(), 0);
         assertEquals(vendingMachineManager.getCentsReturned(),25);
     }
+
+    @Test
+    public void SoldOutTest() {
+        vendingMachineManager.setSoldOut(true);
+        vendingMachineManager.insertCoin(Coin.Quarter);
+        vendingMachineManager.insertCoin(Coin.Quarter);
+        assertFalse(vendingMachineManager.buyProduct(VendingMachineManager.CHIPS));
+
+        vendingMachineManager.setSoldOut(false);
+        assertTrue(vendingMachineManager.buyProduct(VendingMachineManager.CHIPS));
+    }
 }

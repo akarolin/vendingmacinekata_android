@@ -84,6 +84,22 @@ public class VendingMachineInterfaceTests {
         Assert.assertEquals(vendingMachineInterface.checkDisplay(), VendingMachineInterface.INSERT_COIN);
         Assert.assertEquals(vendingMachineInterface.takeChange(), 25);
     }
+
+    @Test
+    public void SoldOutTest() {
+
+        vendingMachineInterface.setSoldOut(true);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
+        vendingMachineInterface.buyChips();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(), VendingMachineInterface.SOLD_OUT);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(), "$0.50");
+
+        vendingMachineInterface.setSoldOut(false);
+        vendingMachineInterface.buyChips();
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.THANK_YOU);
+        Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+    }
 }
 
 

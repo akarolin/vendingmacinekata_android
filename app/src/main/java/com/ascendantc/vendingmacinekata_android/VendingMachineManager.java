@@ -14,11 +14,18 @@ class VendingMachineManager {
     static final String CANDY = "Candy";
 
     private int centsInserted = 0;
-    int getCentsInserted() { return centsInserted; }
+    int getCentsInserted() {
+        return centsInserted;
+    }
 
     private int centsReturned = 0;
     int getCentsReturned() {
         return centsReturned;
+    }
+
+    private boolean soldOut;
+    void setSoldOut(boolean soldOut) {
+        this.soldOut = soldOut;
     }
 
     private HashMap<String, Integer> products;
@@ -53,7 +60,7 @@ class VendingMachineManager {
     boolean buyProduct(String productName) {
         if (BuildConfig.DEBUG && ! products.containsKey(productName)) throw new AssertionError("Product Not Found");
         int price = products.get(productName);
-        boolean canBuy = price <= centsInserted;
+        boolean canBuy = canBuy(price);
         if (canBuy) {
             centsReturned += centsInserted - price;
             centsInserted = 0;
@@ -61,8 +68,16 @@ class VendingMachineManager {
         return canBuy;
     }
 
+    private boolean canBuy(int price) {
+        return !soldOut && price <= centsInserted;
+    }
+
     void returnCoins() {
         centsReturned += centsInserted;
         centsInserted = 0;
+    }
+
+    boolean isSoldOut() {
+        return soldOut;
     }
 }

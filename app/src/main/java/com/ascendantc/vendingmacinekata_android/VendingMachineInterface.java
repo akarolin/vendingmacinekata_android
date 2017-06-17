@@ -12,12 +12,13 @@ class VendingMachineInterface {
     static final String INSERT_COIN = "INSERT COIN";
     static final String PRICE = "PRICE:";
     static final String THANK_YOU = "THANK YOU";
+    static final String SOLD_OUT = "SOLD OUT";
 
     private VendingMachineManager vendingMachineManager = new VendingMachineManager();
 
-    private String displayText = INSERT_COIN;
     private String message = "";
 
+    private String displayText = INSERT_COIN;
     String getDisplayText() {
         return displayText;
     }
@@ -40,11 +41,9 @@ class VendingMachineInterface {
         buyProduct(VendingMachineManager.CHIPS);
     }
 
-
     void buyCola() {
         buyProduct(VendingMachineManager.COLA);
     }
-
 
     void buyCandy() {
         buyProduct(VendingMachineManager.CANDY);
@@ -54,8 +53,12 @@ class VendingMachineInterface {
         if (vendingMachineManager.buyProduct(productName))
             message = THANK_YOU;
         else {
-            int price = vendingMachineManager.getProductPrice(productName);
-            message = String.format(Locale.US,"%s $%d.%02d",PRICE,price/100,price%100);
+            if (vendingMachineManager.isSoldOut()) {
+                message = SOLD_OUT;
+            } else {
+                int price = vendingMachineManager.getProductPrice(productName);
+                message = String.format(Locale.US, "%s $%d.%02d", PRICE, price / 100, price % 100);
+            }
         }
     }
 
@@ -75,5 +78,9 @@ class VendingMachineInterface {
 
     void returnCoins() {
         vendingMachineManager.returnCoins();
+    }
+
+    void setSoldOut(boolean soldOut) {
+        vendingMachineManager.setSoldOut(soldOut);
     }
 }
