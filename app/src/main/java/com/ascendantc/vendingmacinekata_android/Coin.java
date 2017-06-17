@@ -9,7 +9,7 @@ enum Coin {
     Penny(1),
     Nickel(5),
     Dime(10),
-    Quater(25);
+    Quarter(25);
 
     private final int value;
     Coin(int value) { this.value = value; }

@@ -19,7 +19,7 @@ class VendingMachineInterface {
     }
 
     void setDisplayText(int cents) {
-        if (BuildConfig.DEBUG && cents < 0) throw new AssertionError();
+        if (BuildConfig.DEBUG && cents < 0) throw new AssertionError("cents must be > 0");
         displayText = cents > 0 ? String.format(Locale.US,"$%d.%02d",cents/100,cents%100) : INSERT_COIN;
     }
 

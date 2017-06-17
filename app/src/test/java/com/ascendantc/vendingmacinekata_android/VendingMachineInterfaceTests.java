@@ -1,7 +1,6 @@
 package com.ascendantc.vendingmacinekata_android;
 
 
-import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -31,7 +30,7 @@ public class VendingMachineInterfaceTests {
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.05");
         vendingMachineInterface.insertCoin(Coin.Dime);
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.15");
-        vendingMachineInterface.insertCoin(Coin.Quater);
+        vendingMachineInterface.insertCoin(Coin.Quarter);
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.40");
         vendingMachineInterface.insertCoin(Coin.Penny);
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.40");
