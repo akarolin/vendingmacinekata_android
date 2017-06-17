@@ -30,6 +30,7 @@ public class VendingMachineManagerTests {
         assertEquals(total, 40);
         total = vendingMachineManager.insertCoin(Coin.Penny);
         assertEquals(total, 40);
+        assertEquals(vendingMachineManager.getCentsReturned(),1);
     }
 
     @Test
@@ -53,5 +54,8 @@ public class VendingMachineManagerTests {
         vendingMachineManager.insertCoin(Coin.Quarter);
         vendingMachineManager.insertCoin(Coin.Quarter);
         assertTrue(vendingMachineManager.buyProduct(VendingMachineManager.CANDY));
+        assertEquals(vendingMachineManager.getCentsReturned(),10);
     }
+
+
 }

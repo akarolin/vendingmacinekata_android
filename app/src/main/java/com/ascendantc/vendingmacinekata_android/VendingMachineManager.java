@@ -14,6 +14,12 @@ class VendingMachineManager {
     static final String CANDY = "Candy";
 
     private int centsInserted = 0;
+    int getCentsInserted() { return centsInserted; }
+
+    private int centsReturned = 0;
+    int getCentsReturned() {
+        return centsReturned;
+    }
 
     private HashMap<String, Integer> products;
 
@@ -28,11 +34,13 @@ class VendingMachineManager {
         products.put(CANDY, 65);
     }
 
-    int getCentsInserted() { return centsInserted; }
 
     int insertCoin(Coin coin) {
         if (acceptsCoin(coin))
             centsInserted += coin.value();
+        else
+            centsReturned = coin.value();
+
         return centsInserted;
     }
 
@@ -47,6 +55,7 @@ class VendingMachineManager {
         int price = products.get(productName);
         boolean canBuy = price <= centsInserted;
         if (canBuy) {
+            centsReturned += centsInserted - price;
             centsInserted = 0;
         }
         return canBuy;

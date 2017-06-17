@@ -69,4 +69,8 @@ class VendingMachineInterface {
         return displayText;
     }
 
+    int takeChange() {
+        return vendingMachineManager.getCentsReturned();
+    }
+
 }

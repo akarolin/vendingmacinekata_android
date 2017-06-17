@@ -36,6 +36,7 @@ public class VendingMachineInterfaceTests {
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.40");
         vendingMachineInterface.insertCoin(Coin.Penny);
         assertEquals(vendingMachineInterface.getDisplayText(), "$0.40");
+        Assert.assertEquals(vendingMachineInterface.takeChange(),1);
     }
 
     @Test
@@ -71,6 +72,7 @@ public class VendingMachineInterfaceTests {
         vendingMachineInterface.buyCandy();
         Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.THANK_YOU);
         Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+        Assert.assertEquals(vendingMachineInterface.takeChange(),10);
 
     }
 }
