@@ -57,5 +57,14 @@ public class VendingMachineManagerTests {
         assertEquals(vendingMachineManager.getCentsReturned(),10);
     }
 
+    @Test
+    public void CoinReturnTest() {
+        vendingMachineManager.insertCoin(Coin.Quarter);
+        assertEquals(vendingMachineManager.getCentsInserted(),25);
+        assertEquals(vendingMachineManager.getCentsReturned(), 0);
 
+        vendingMachineManager.returnCoins();
+        assertEquals(vendingMachineManager.getCentsInserted(), 0);
+        assertEquals(vendingMachineManager.getCentsReturned(),25);
+    }
 }

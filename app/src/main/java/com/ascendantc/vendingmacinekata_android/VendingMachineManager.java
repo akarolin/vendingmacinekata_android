@@ -60,4 +60,9 @@ class VendingMachineManager {
         }
         return canBuy;
     }
+
+    void returnCoins() {
+        centsReturned += centsInserted;
+        centsInserted = 0;
+    }
 }

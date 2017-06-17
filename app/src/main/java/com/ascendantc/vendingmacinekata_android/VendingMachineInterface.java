@@ -73,4 +73,7 @@ class VendingMachineInterface {
         return vendingMachineManager.getCentsReturned();
     }
 
+    void returnCoins() {
+        vendingMachineManager.returnCoins();
+    }
 }
