@@ -31,6 +31,9 @@ public class VendingMachineManagerTests {
         total = vendingMachineManager.insertCoin(Coin.Penny);
         assertEquals(total, 40);
         assertEquals(vendingMachineManager.getCentsReturned(),1);
+        total = vendingMachineManager.insertCoin(Coin.Penny);
+        assertEquals(total, 40);
+        assertEquals(vendingMachineManager.getCentsReturned(),2);
     }
 
     @Test
@@ -90,5 +93,17 @@ public class VendingMachineManagerTests {
         vendingMachineManager.setExactChange(false);
         assertTrue(vendingMachineManager.buyProduct(VendingMachineManager.CANDY));
         assertEquals(vendingMachineManager.getCentsReturned(),10);
+    }
+
+    @Test
+    public void RemoveChangeTest() {
+        vendingMachineManager.insertCoin(Coin.Penny);
+        vendingMachineManager.insertCoin(Coin.Penny);
+        vendingMachineManager.insertCoin(Coin.Penny);
+        vendingMachineManager.insertCoin(Coin.Quarter);
+        assertEquals(vendingMachineManager.getCentsReturned(),3);
+        assertEquals(3,vendingMachineManager.removeChange());
+        assertEquals(vendingMachineManager.getCentsReturned(),0);
+        assertEquals(vendingMachineManager.getCentsInserted(),25);
     }
 }

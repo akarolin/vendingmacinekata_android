@@ -6,13 +6,136 @@
     android:layout_height="match_parent"
     tools:context="com.ascendantc.vendingmacinekata_android.VendingMachineActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/chips_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/chips"
+        android:onClick="buyChips"
+        app:layout_constraintRight_toLeftOf="@+id/cola_button"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <Button
+        android:id="@+id/cola_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cola"
+        android:onClick="buyCola"
+        app:layout_constraintRight_toLeftOf="@+id/candy_button"
+        app:layout_constraintLeft_toRightOf="@+id/chips_button"
+        app:layout_constraintBottom_toBottomOf="@+id/chips_button"
+        app:layout_constraintTop_toTopOf="@+id/chips_button" />
+
+    <Button
+        android:id="@+id/candy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/candy"
+        android:onClick="buyCandy"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toRightOf="@+id/cola_button"
+        app:layout_constraintBottom_toBottomOf="@+id/cola_button"
+        app:layout_constraintTop_toTopOf="@+id/cola_button" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/money_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/exact_change_only"
+        app:layout_constraintBottom_toTopOf="@id/spinner"
+        app:layout_constraintRight_toRightOf="@id/spinner"
+        app:layout_constraintLeft_toLeftOf="@id/spinner" />
+
+    <TextView
+        android:id="@+id/change_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zero_dollars"
+        app:layout_constraintLeft_toLeftOf="@+id/change_button"
+        app:layout_constraintRight_toRightOf="@+id/change_button"
+        app:layout_constraintBottom_toTopOf="@+id/change_button"
+        />
+
+    <Button
+        android:id="@+id/change_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/take_change"
+        android:onClick="takeChange"
+        app:layout_constraintLeft_toLeftOf="@+id/candy_button"
+        app:layout_constraintRight_toRightOf="@+id/candy_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <ToggleButton
+        android:id="@+id/exactchange_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exact_change"
+        android:onClick="exactChangeToggle"
+        app:layout_constraintBottom_toBottomOf="@+id/change_button"
+        app:layout_constraintTop_toTopOf="@+id/change_button"
+        app:layout_constraintLeft_toLeftOf="@+id/chips_button"
+        app:layout_constraintRight_toRightOf="@+id/chips_button"
+        />
+
+    <ToggleButton
+        android:id="@+id/soldout_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sold_out"
+        android:onClick="soldOutToggle"
+        app:layout_constraintRight_toRightOf="@+id/exactchange_toggle"
+        app:layout_constraintLeft_toLeftOf="@+id/exactchange_toggle"
+        app:layout_constraintBottom_toTopOf="@+id/exactchange_toggle"
+        />
+
+    <TextView
+        android:id="@+id/exactChange_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exact_change"
+        app:layout_constraintBottom_toBottomOf="@+id/exactchange_toggle"
+        app:layout_constraintTop_toTopOf="@+id/exactchange_toggle"
+        app:layout_constraintLeft_toRightOf="@id/exactchange_toggle"
+        />
+
+    <TextView
+        android:id="@+id/soldOut_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sold_out"
+        app:layout_constraintBottom_toBottomOf="@+id/soldout_toggle"
+        app:layout_constraintTop_toTopOf="@+id/soldout_toggle"
+        app:layout_constraintLeft_toRightOf="@id/soldout_toggle"
+        />
+
+    <Button
+        android:id="@+id/coinReturn_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/coin_return"
+        android:onClick="coinReturnClick"
+        app:layout_constraintTop_toBottomOf="@id/spinner"
+        app:layout_constraintLeft_toLeftOf="@id/spinner"
+        app:layout_constraintRight_toRightOf="@id/spinner"
+        />
 
 </android.support.constraint.ConstraintLayout>

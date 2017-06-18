@@ -82,7 +82,7 @@ public class VendingMachineInterfaceTests {
 
         vendingMachineInterface.returnCoins();
         Assert.assertEquals(vendingMachineInterface.checkDisplay(), VendingMachineInterface.INSERT_COIN);
-        Assert.assertEquals(vendingMachineInterface.takeChange(), 25);
+        Assert.assertEquals(vendingMachineInterface.displayChange(), "$0.25");
     }
 
     @Test
@@ -117,6 +117,14 @@ public class VendingMachineInterfaceTests {
 
         vendingMachineInterface.setExactChange(false);
         Assert.assertEquals(vendingMachineInterface.checkDisplay(),VendingMachineInterface.INSERT_COIN);
+    }
+
+    @Test
+    public void TakeChangeTest() {
+        vendingMachineInterface.insertCoin(Coin.Penny);
+        vendingMachineInterface.insertCoin(Coin.Penny);
+        Assert.assertEquals(vendingMachineInterface.takeChange(), 2);
+        Assert.assertEquals(vendingMachineInterface.displayChange(), "$0.00");
     }
 }
 

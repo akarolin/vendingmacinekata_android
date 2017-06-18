@@ -27,10 +27,14 @@ class VendingMachineInterface {
     void setDisplayText(int cents) {
         if (BuildConfig.DEBUG && cents < 0) throw new AssertionError("cents must be > 0");
         String zeroText = vendingMachineManager.getExactChangeRequired() ? EXACT_CHANGE : INSERT_COIN;
-        displayText = cents > 0 ? String.format(Locale.US,"$%d.%02d",cents/100,cents%100) : zeroText;
+        displayText = cents > 0 ? formatCents(cents): zeroText;
     }
 
-    void setDisplayText(String message) {
+    private String formatCents(int cents) {
+        return String.format(Locale.US,"$%d.%02d",cents/100,cents%100);
+    }
+
+    private void setDisplayText(String message) {
         displayText = message;
     }
         void insertCoin(Coin coin) {
@@ -59,7 +63,7 @@ class VendingMachineInterface {
                 message = SOLD_OUT;
             } else {
                 int price = vendingMachineManager.getProductPrice(productName);
-                message = String.format(Locale.US, "%s $%d.%02d", PRICE, price / 100, price % 100);
+                message = String.format(Locale.US, "%s %s", PRICE, formatCents(price));
             }
         }
     }
@@ -74,8 +78,10 @@ class VendingMachineInterface {
         return displayText;
     }
 
+    String displayChange() {return formatCents(vendingMachineManager.getCentsReturned());}
+
     int takeChange() {
-        return vendingMachineManager.getCentsReturned();
+        return vendingMachineManager.removeChange();
     }
 
     void returnCoins() {
